@@ -1,5 +1,7 @@
 package semantic.symbol;
 
+import codeGenerator.varType;
+
 /**
  * Created by mohammad hosein on 6/28/2015.
  */
@@ -27,5 +29,15 @@ public class Symbol{
     {
         this.type = type;
         this.address = address;
+    }
+
+    public varType getVarTypeFromType() {
+        switch (getType()) {
+            case Bool:
+                return varType.Bool;
+            case Int:
+            default:
+                return varType.Int;
+        }
     }
 }
