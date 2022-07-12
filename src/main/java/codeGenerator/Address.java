@@ -8,6 +8,32 @@ public class Address {
     public TypeAddress Type;
     public varType varType;
 
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public TypeAddress getType() {
+        return Type;
+    }
+
+    public void setType(TypeAddress type) {
+        Type = type;
+    }
+
+    public codeGenerator.varType getVarType() {
+        return varType;
+    }
+
+    public void setVarType(codeGenerator.varType varType) {
+        this.varType = varType;
+    }
+
+
+
     public Address(int num,varType varType, TypeAddress Type) {
         this.num = num;
         this.Type = Type;

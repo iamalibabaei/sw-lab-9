@@ -54,25 +54,25 @@ public class Parser {
         Log.print(currentAction.toString());
         //Log.print("");
 
-        switch (currentAction.action) {
+        switch (currentAction.getAction()) {
           case shift:
-            parsStack.push(currentAction.number);
+            parsStack.push(currentAction.getNumber());
             lookAhead = lexicalAnalyzer.getNextToken();
 
             break;
           case reduce:
-            Rule rule = rules.get(currentAction.number);
-            for (int i = 0; i < rule.RHS.size(); i++) {
+            Rule rule = rules.get(currentAction.getNumber());
+            for (int i = 0; i < rule.getRHS().size(); i++) {
               parsStack.pop();
             }
 
-            Log.print(/*"state : " +*/ parsStack.peek() + "\t" + rule.LHS);
+            Log.print(/*"state : " +*/ parsStack.peek() + "\t" + rule.getLHS());
 //                        Log.print("LHS : "+rule.LHS);
-            parsStack.push(parseTable.getGotoTable(parsStack.peek(), rule.LHS));
+            parsStack.push(parseTable.getGotoTable(parsStack.peek(), rule.getLHS()));
             Log.print(/*"new State : " + */parsStack.peek() + "");
 //                        Log.print("");
             try {
-              cg.semanticFunction(rule.semanticAction, lookAhead);
+              cg.semanticFunction(rule.getSemanticAction(), lookAhead);
             } catch (Exception e) {
               Log.print("Code Genetator Error");
             }
