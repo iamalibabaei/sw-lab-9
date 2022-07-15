@@ -18,10 +18,11 @@ public class CodeGenerator {
     private final Stack<String> symbolStack = new Stack<>();
     private final Stack<String> callStack = new Stack<>();
     private final SymbolTable symbolTable;
+    private final Context context;
 
     public CodeGenerator() {
         symbolTable = new SymbolTable(memory);
-        //TODO
+        context = new Context(this);
     }
 
     public void printMemory() {
@@ -38,116 +39,10 @@ public class CodeGenerator {
 
     public void semanticFunction(int func, Token next) {
         Log.print("codegenerator : " + func);
-        switch (func) {
-            case 0:
-                return;
-            case 1:
-                checkID();
-                break;
-            case 2:
-                pid(next);
-                break;
-            case 3:
-                getAddressStackLastElement();
-                getAddressStackLastElement();
-                pushToAddressStack(fPid());
-                break;
-            case 4:
-                kPid(next);
-                break;
-            case 5:
-                intPid(next);
-                break;
-            case 6:
-                getAddressStackLastElement();
-                getAddressStackLastElement();
-                startCall();
-                break;
-            case 7:
-                call();
-                break;
-            case 8:
-                arg(getAddressStackLastElement());
-                break;
-            case 9:
-                assign(getAddressStackLastElement(), getAddressStackLastElement());
-                break;
-            case 10:
-                pushToAddressStack(add(getAddressStackLastElement(), getAddressStackLastElement()));
-                break;
-            case 11:
-                pushToAddressStack(sub(getAddressStackLastElement(), getAddressStackLastElement()));
-                break;
-            case 12:
-                pushToAddressStack(mult(getAddressStackLastElement(), getAddressStackLastElement()));
-                break;
-            case 13:
-                label();
-                break;
-            case 14:
-                save();
-                break;
-            case 15:
-                whileDef(getAddressStackLastElement(), getAddressStackLastElement(), getAddressStackLastElement());
-                break;
-            case 16:
-                pushToAddressStack(jpfSave(getAddressStackLastElement(), getAddressStackLastElement()));
-                break;
-            case 17:
-                jpHere(getAddressStackLastElement());
-                break;
-            case 18:
-                print(getAddressStackLastElement());
-                break;
-            case 19:
-                pushToAddressStack(equal(getAddressStackLastElement(), getAddressStackLastElement()));
-                break;
-            case 20:
-                pushToAddressStack(less_than(getAddressStackLastElement(), getAddressStackLastElement()));
-                break;
-            case 21:
-                pushToAddressStack(and(getAddressStackLastElement(), getAddressStackLastElement()));
-                break;
-            case 22:
-                pushToAddressStack(not(getAddressStackLastElement(), getAddressStackLastElement()));
-                break;
-            case 23:
-                defClass();
-                break;
-            case 24:
-                defMethod();
-                break;
-            case 25:
-                popClass();
-                break;
-            case 26:
-                extend();
-                break;
-            case 27:
-                defField();
-                break;
-            case 28:
-                defVar();
-                break;
-            case 29:
-                methodReturn(getAddressStackLastElement());
-                break;
-            case 30:
-                defParam();
-                break;
-            case 31:
-                lastTypeBool();
-                break;
-            case 32:
-                lastTypeInt();
-                break;
-            case 33:
-                defMain(getAddressStackLastElement().getNum());
-                break;
-        }
+        this.context.handle(func, next);
     }
 
-    private void defMain(int addressNum) {
+    public void defMain(int addressNum) {
         memory.add3AddressCode(addressNum, Operation.JP, new Address(memory.getCurrentCodeBlockAddress(), VarType.ADDRESS), null, null);
         String methodName = "main";
         String className = symbolStack.pop();
@@ -325,7 +220,7 @@ public class CodeGenerator {
         return temp;
     }
 
-    public Address less_than(Address s1, Address s2) {
+    public Address lessThan(Address s1, Address s2) {
         Address temp = new Address(memory.getTemp(), VarType.BOOL);
         if (s1.getVarType() != VarType.INT || s2.getVarType() != VarType.INT) {
             ErrorHandler.printError("The type of operands in less than operator is different");

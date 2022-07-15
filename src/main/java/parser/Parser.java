@@ -68,6 +68,7 @@ public class Parser {
                         Log.print(parsStack.peek() + "");
                         try {
                             codeGeneratorFacade.semanticFunction(rule.getSemanticAction(), lookAhead);
+//                            System.out.println(lookAhead);
                         } catch (Exception e) {
                             Log.print("Code Genetator Error");
                         }
