@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Stack;
 
 import Log.Log;
-import codeGenerator.CodeGenerator;
+import codeGenerator.CodeGeneratorFacade;
 import errorHandler.ErrorHandler;
 import scanner.lexicalAnalyzer;
 import scanner.token.Token;
@@ -20,7 +20,7 @@ public class Parser {
   private Stack<Integer> parsStack;
   private ParseTable parseTable;
   private lexicalAnalyzer lexicalAnalyzer;
-  private CodeGenerator cg;
+  private final CodeGeneratorFacade codeGeneratorFacade;
 
   public Parser() {
     parsStack = new Stack<Integer>();
@@ -38,7 +38,7 @@ public class Parser {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    cg = new CodeGenerator();
+    codeGeneratorFacade = new CodeGeneratorFacade();
   }
 
   public void startParse(java.util.Scanner sc) {
@@ -72,7 +72,7 @@ public class Parser {
             Log.print(/*"new State : " + */parsStack.peek() + "");
 //                        Log.print("");
             try {
-              cg.semanticFunction(rule.getSemanticAction(), lookAhead);
+              codeGeneratorFacade.semanticFunction(rule.getSemanticAction(), lookAhead);
             } catch (Exception e) {
               Log.print("Code Genetator Error");
             }
@@ -106,7 +106,7 @@ public class Parser {
 
     }
     if (!ErrorHandler.hasError)
-      cg.printMemory();
+      codeGeneratorFacade.printMemory();
 
 
   }
