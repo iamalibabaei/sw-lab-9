@@ -33,11 +33,11 @@ public class Symbol{
 
     public varType getVarTypeFromType() {
         switch (getType()) {
-            case Bool:
-                return varType.Bool;
-            case Int:
+            case BOOL:
+                return varType.BOOL;
+            case INT:
             default:
-                return varType.Int;
+                return varType.INT;
         }
     }
 }

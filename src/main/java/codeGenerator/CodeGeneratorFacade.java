@@ -14,7 +14,6 @@ public class CodeGeneratorFacade {
         codeGenerator.printMemory();
     }
 
-
     public void semanticFunction(int func, Token next){
         codeGenerator.semanticFunction(func, next);
     }

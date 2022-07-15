@@ -12,10 +12,6 @@ public class Address {
         return num;
     }
 
-    public void setNum(int num) {
-        this.num = num;
-    }
-
     public TypeAddress getType() {
         return Type;
     }
@@ -28,12 +24,6 @@ public class Address {
         return varType;
     }
 
-    public void setVarType(codeGenerator.varType varType) {
-        this.varType = varType;
-    }
-
-
-
     public Address(int num,varType varType, TypeAddress Type) {
         this.num = num;
         this.Type = Type;
@@ -42,16 +32,16 @@ public class Address {
 
     public Address(int num,varType varType) {
         this.num = num;
-        this.Type = TypeAddress.Direct;
+        this.Type = TypeAddress.DIRECT;
         this.varType = varType;
     }
     public String toString(){
         switch (Type){
-            case Direct:
+            case DIRECT:
                 return num+"";
-            case Indirect:
+            case INDIRECT:
                 return "@"+num;
-            case Imidiate:
+            case IMMEDIATE:
                 return "#"+num;
         }
         return num+"";

@@ -7,7 +7,7 @@ import java.util.List;
  * Created by mohammad hosein on 6/27/2015.
  */
 public class Memory {
-    private List<_3AddressCode> codeBlock;
+    private final List<_3AddressCode> codeBlock;
     private int lastTempIndex;
     private int lastDataAddress;
     private static final int stratTempMemoryAddress = 500;
@@ -16,7 +16,7 @@ public class Memory {
     private static final int tempSize = 4;
 
     public Memory() {
-        codeBlock = new ArrayList<_3AddressCode>();
+        codeBlock = new ArrayList<>();
         lastTempIndex = stratTempMemoryAddress;
         lastDataAddress = stratDataMemoryAddress;
     }
@@ -76,16 +76,16 @@ class _3AddressCode {
     public String toString()
     {
         if(operation == null) return "";
-        StringBuffer res = new StringBuffer("(");
+        StringBuilder res = new StringBuilder("(");
         res.append(operation.toString()).append(",");
         if(Operand1 != null)
-            res.append(Operand1.toString());
+            res.append(Operand1);
         res.append(",");
         if(Operand2 != null)
-            res.append(Operand2.toString());
+            res.append(Operand2);
         res.append(",");
         if(Operand3 != null)
-            res.append(Operand3.toString());
+            res.append(Operand3);
         res.append(")");
 
         return res.toString();
