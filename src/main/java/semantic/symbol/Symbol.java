@@ -1,6 +1,6 @@
 package semantic.symbol;
 
-import codeGenerator.varType;
+import codegenerator.VarType;
 
 /**
  * Created by mohammad hosein on 6/28/2015.
@@ -31,13 +31,13 @@ public class Symbol{
         this.address = address;
     }
 
-    public varType getVarTypeFromType() {
+    public VarType getVarTypeFromType() {
         switch (getType()) {
             case BOOL:
-                return varType.BOOL;
+                return VarType.BOOL;
             case INT:
             default:
-                return varType.INT;
+                return VarType.INT;
         }
     }
 }

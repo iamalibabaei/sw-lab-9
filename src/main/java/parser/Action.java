@@ -1,10 +1,10 @@
 package parser;
 
 public class Action {
-  private final act action;
+  private final Act action;
   private final int number;
 
-  public act getAction() {
+  public Act getAction() {
     return action;
   }
 
@@ -12,7 +12,7 @@ public class Action {
     return number;
   }
 
-  public Action(act action, int number) {
+  public Action(Act action, int number) {
     this.action = action;
     this.number = number;
   }
@@ -30,7 +30,7 @@ public class Action {
   }
 }
 
-enum act {
+enum Act {
   SHIFT,
   REDUCE,
   ACCEPT

@@ -1,4 +1,4 @@
-package codeGenerator;
+package codegenerator;
 
 /**
  * Created by mohammad hosein on 6/28/2015.
@@ -6,7 +6,7 @@ package codeGenerator;
 public class Address {
     public int num;
     public TypeAddress Type;
-    public varType varType;
+    public VarType varType;
 
     public int getNum() {
         return num;
@@ -20,17 +20,17 @@ public class Address {
         Type = type;
     }
 
-    public codeGenerator.varType getVarType() {
+    public VarType getVarType() {
         return varType;
     }
 
-    public Address(int num,varType varType, TypeAddress Type) {
+    public Address(int num, VarType varType, TypeAddress type) {
         this.num = num;
-        this.Type = Type;
+        this.Type = type;
         this.varType = varType;
     }
 
-    public Address(int num,varType varType) {
+    public Address(int num, VarType varType) {
         this.num = num;
         this.Type = TypeAddress.DIRECT;
         this.varType = varType;

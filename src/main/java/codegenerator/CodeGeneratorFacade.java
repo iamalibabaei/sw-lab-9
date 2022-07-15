@@ -1,4 +1,4 @@
-package codeGenerator;
+package codegenerator;
 
 import scanner.token.Token;
 
